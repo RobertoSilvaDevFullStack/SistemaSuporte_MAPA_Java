@@ -1,5 +1,5 @@
 import java.util.Scanner;
-import java.util.InputMismatchException;
+import java.util.NoSuchElementException;
 public class Principal {
     public static void main(String[] args) {
         System.out.println("=== SISTEMA DE SUPORTE ===");
@@ -34,9 +34,11 @@ public class Principal {
         try {
             System.out.print("Digite o número do chamado: ");
             numeroInformado = scanner.nextInt();
-        } catch (InputMismatchException e) {
+        } catch (NoSuchElementException e) { // cobre InputMismatchException (subclasse) e fim da entrada (EOF)
             System.out.println("Erro: digite um número inteiro válido.");
-            scanner.nextLine();
+            if (scanner.hasNextLine()) {
+                scanner.nextLine();
+            }
             numeroInformado = 1001;
             System.out.println("Número padrão utilizado: " + numeroInformado);
         }
